@@ -2,6 +2,7 @@
 import { computed, nextTick, ref, watch } from 'vue'
 import { RouterLink, RouterView, useRoute } from 'vue-router'
 import { steps } from '@/router'
+import EstimatePanel from '@/components/EstimatePanel.vue'
 
 const route = useRoute()
 const heading = ref<HTMLHeadingElement>()
@@ -55,6 +56,7 @@ watch(
       </ol>
     </nav>
 
+    <div class="grid gap-8 lg:grid-cols-[1fr_18rem] lg:items-start">
     <main id="main">
       <h1 ref="heading" tabindex="-1" class="mb-6 text-3xl font-bold text-slate-900 focus:outline-none">
         {{ current.title }}
@@ -80,5 +82,8 @@ watch(
         </RouterLink>
       </div>
     </main>
+
+    <EstimatePanel />
+    </div>
   </div>
 </template>
