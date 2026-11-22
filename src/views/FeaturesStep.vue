@@ -19,10 +19,10 @@ function detail(feature: { hours: number; percent: number }) {
       <OptionCard
         v-for="(feature, key) in pricing.features"
         :key="key"
-        v-model="store.project.features"
         type="checkbox"
         name="features"
-        :value="key"
+        :checked="store.project.features.includes(key)"
+        @change="store.toggleFeature(key, $event)"
         :label="feature.label"
         :detail="detail(feature)"
       />

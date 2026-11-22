@@ -13,10 +13,10 @@ const store = useProjectStore()
       <OptionCard
         v-for="(deadline, key) in pricing.deadlines"
         :key="key"
-        v-model="store.project.deadline"
         type="radio"
         name="deadline"
-        :value="key"
+        :checked="store.project.deadline === key"
+        @change="store.project.deadline = key"
         :label="deadline.label"
       />
     </div>

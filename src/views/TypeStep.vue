@@ -13,10 +13,10 @@ const store = useProjectStore()
       <OptionCard
         v-for="(site, key) in pricing.siteTypes"
         :key="key"
-        v-model="store.project.siteType"
         type="radio"
         name="siteType"
-        :value="key"
+        :checked="store.project.siteType === key"
+        @change="store.project.siteType = key"
         :label="site.label"
         :detail="`Basis ${site.baseHours} uur`"
       />
