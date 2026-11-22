@@ -1,10 +1,25 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { pricing } from '@/config/pricing'
 import { formatEuro } from '@/lib/format'
+import { downloadQuotePdf } from '@/lib/pdf'
 import { useProjectStore } from '@/stores/project'
 
 const store = useProjectStore()
+const busy = ref(false)
+const error = ref('')
+
+async function download() {
+  busy.value = true
+  error.value = ''
+  try {
+    await downloadQuotePdf(store.project, store.quote)
+  } catch {
+    error.value = 'De PDF kon niet worden gemaakt. Probeer het opnieuw.'
+  } finally {
+    busy.value = false
+  }
+}
 
 const choices = computed(() => {
   const { siteType, pages, features, deadline } = store.project
@@ -59,5 +74,18 @@ const choices = computed(() => {
         </tfoot>
       </table>
     </section>
+
+    <div>
+      <button
+        type="button"
+        :disabled="busy"
+        :aria-busy="busy"
+        class="rounded-lg bg-indigo-600 px-5 py-2 font-medium text-white hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2 disabled:opacity-60"
+        @click="download"
+      >
+        {{ busy ? 'PDF wordt gemaakt…' : 'Download als PDF' }}
+      </button>
+      <p v-if="error" role="alert" class="mt-2 text-red-700">{{ error }}</p>
+    </div>
   </div>
 </template>

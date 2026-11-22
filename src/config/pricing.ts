@@ -26,7 +26,7 @@ export const pricing = {
   } satisfies Record<Feature, { label: string; hours: number; percent: number }>,
 
   deadlines: {
-    flexible: { label: 'Flexibel (−5%)', multiplier: 0.95 },
+    flexible: { label: 'Flexibel (-5%)', multiplier: 0.95 },
     normal: { label: 'Normaal', multiplier: 1 },
     rush: { label: 'Spoed (+25%)', multiplier: 1.25 },
   } satisfies Record<Deadline, { label: string; multiplier: number }>,
