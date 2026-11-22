@@ -70,3 +70,7 @@ npm run preview      # serve the production build locally
 ```
 
 The choices are kept in memory only, so refreshing the page starts over.
+
+## Deploying
+
+The repo includes a [`netlify.toml`](netlify.toml) that sets the build command, the publish directory (`dist`), the Node version, and a catch-all redirect to `index.html`. Import the repo in Netlify and it deploys as is. On other static hosts, make sure every route falls back to `index.html`, because the router uses HTML5 history mode.
